@@ -10,7 +10,7 @@ resources:
   - name: build_info_1_docker_build_push
     type: BuildInfo
     configuration:
-      sourceArtifactory: art
+      sourceArtifactory: demoArt
       buildName: svc_build
       buildNumber: 1
 
@@ -22,19 +22,19 @@ pipelines:
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: 34.66.107.45:8081/docker-local/alpine37
+          dockerImageName: jfrog.local:5000/alpine37
           dockerImageTag: $run_number
           inputResources:
             - name: repo_1_docker_build_push
           integrations:
-            - name: art
+            - name: demoArt
 
       - name: docker_push
         type: DockerPush
         configuration:
           targetRepository: docker-local
           integrations:
-            - name: art
+            - name: demoArt
           inputSteps:
             - name: docker_build
 
