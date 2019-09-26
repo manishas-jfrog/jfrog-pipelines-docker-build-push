@@ -15,7 +15,7 @@ resources:
       buildNumber: 1
 
 pipelines:
-  - name: step_1_docker_build_push
+  - name: pipeline_docker_build_push
     steps:
       - name: docker_build
         type: DockerBuild
