@@ -54,7 +54,7 @@ pipelines:
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: 35.192.150.93/docker-local/alpine37
+          dockerImageName: 35.192.150.93:8082/docker-local/alpine37
           dockerImageTag: ${run_number}
           inputResources:
             - name: repo_1_docker_build_push
