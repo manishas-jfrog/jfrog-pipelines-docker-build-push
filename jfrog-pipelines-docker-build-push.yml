@@ -14,6 +14,13 @@ resources:
       buildName: svc_build
       buildNumber: 1
 
+  - name: promoted_build_info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: demoArt
+      buildName: svc_build
+      buildNumber: 1
+
 pipelines:
   - name: pipeline_docker_build_push
     steps:
@@ -45,3 +52,14 @@ pipelines:
             - name: docker_push
           outputResources:
             - name: build_info_1_docker_build_push
+
+      - name: promote_build
+        type: PromoteBuild
+        configuration:
+          targetRepository: demoPipelines
+          integrations:
+            - name: demoArt
+          inputResources:
+            - name: build_info_1_docker_build_push
+          outputResources:
+            - name: promoted_build_info
