@@ -23,7 +23,7 @@ pipelines:
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: pipe-master.jfrog.info:8082/docker-local/alpine37
-          dockerImageTag: $run_number
+          dockerImageTag: ${run_number}
           inputResources:
             - name: repo_1_docker_build_push
           integrations:
