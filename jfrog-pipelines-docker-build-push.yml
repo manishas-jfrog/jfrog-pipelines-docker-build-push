@@ -81,7 +81,7 @@ pipelines:
       - name: promote_build
         type: PromoteBuild
         configuration:
-          targetRepository: demoPipelines
+          targetRepository: promoted-pipelines
           integrations:
             - name: demoArt
           inputResources:
