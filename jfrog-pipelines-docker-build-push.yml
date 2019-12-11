@@ -21,30 +21,30 @@ resources:
       buildName: svc_build
       buildNumber: 1
 
-  - name: releaseBundle
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: demoDist
-      name: demo_rb
-      version: v1.0.0
-
-  - name: signedBundle
-    type: ReleaseBundle
-    configuration:
-      sourceDistribution: demoDist
-      name: demo_rb
-      version: v1.0.0
-
-  - name: distributionRules
-    type: DistributionRule
-    configuration:
-      sourceDistribution: demoDist
-      serviceName: "*"
-      siteName: "*"
-      cityName: "*"
-      countryCodes:
-        - "CN"
-        - "GB"
+  # - name: releaseBundle
+  #   type: ReleaseBundle
+  #   configuration:
+  #     sourceDistribution: demoDist
+  #     name: demo_rb
+  #     version: v1.0.0
+  #
+  # - name: signedBundle
+  #   type: ReleaseBundle
+  #   configuration:
+  #     sourceDistribution: demoDist
+  #     name: demo_rb
+  #     version: v1.0.0
+  #
+  # - name: distributionRules
+  #   type: DistributionRule
+  #   configuration:
+  #     sourceDistribution: demoDist
+  #     serviceName: "*"
+  #     siteName: "*"
+  #     cityName: "*"
+  #     countryCodes:
+  #       - "CN"
+  #       - "GB"
 
 pipelines:
   - name: pipeline_docker_build_push
@@ -89,39 +89,39 @@ pipelines:
           outputResources:
             - name: promoted_build_info
 
-  - name: demo_release
-    steps:
-      - name: bundle
-        type: CreateReleaseBundle
-        configuration:
-          releaseBundleName: demo_rb
-          releaseBundleVersion: v1.0.${run_number}
-          dryRun: false
-          sign: false
-          description: "this is a demo bundle"
-          inputResources:
-            - name: promoted_build_info
-              trigger: false
-          outputResources:
-            - name: releaseBundle
-          releaseNotes:
-            syntax: markdown
-            content: |
-              ## Heading
-                * firstBullet
-                * secondBullet
-      - name: sign
-        type: SignReleaseBundle
-        configuration:
-          inputResources:
-            - name: releaseBundle
-          outputResources:
-            - name: signedBundle
-
-      - name: distribute
-        type: DistributeReleaseBundle
-        configuration:
-          dryRun: false
-          inputResources:
-            - name: signedBundle
-            - name: distributionRules
+  # - name: demo_release
+  #   steps:
+  #     - name: bundle
+  #       type: CreateReleaseBundle
+  #       configuration:
+  #         releaseBundleName: demo_rb
+  #         releaseBundleVersion: v1.0.${run_number}
+  #         dryRun: false
+  #         sign: false
+  #         description: "this is a demo bundle"
+  #         inputResources:
+  #           - name: promoted_build_info
+  #             trigger: false
+  #         outputResources:
+  #           - name: releaseBundle
+  #         releaseNotes:
+  #           syntax: markdown
+  #           content: |
+  #             ## Heading
+  #               * firstBullet
+  #               * secondBullet
+  #     - name: sign
+  #       type: SignReleaseBundle
+  #       configuration:
+  #         inputResources:
+  #           - name: releaseBundle
+  #         outputResources:
+  #           - name: signedBundle
+  #
+  #     - name: distribute
+  #       type: DistributeReleaseBundle
+  #       configuration:
+  #         dryRun: false
+  #         inputResources:
+  #           - name: signedBundle
+  #           - name: distributionRules
