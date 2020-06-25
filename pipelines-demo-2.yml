@@ -2,7 +2,7 @@ resources:
   - name: repo_1_docker_build_push
     type: GitRepo
     configuration:
-      gitProvider: manishas_github   # replace with your integration
+      gitProvider: manishas_jfrog_github   # replace with your integration
       path: manishas-jfrog/jfrog-pipelines-docker-build-push    # replace with your repository name
       branches:
         include: master
