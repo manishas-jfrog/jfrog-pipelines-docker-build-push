@@ -21,12 +21,12 @@ resources:
       buildName: svc_build
       buildNumber: 1
       
-  - name: image_dbp
+  - name: image_pdbp
     type: Image
     configuration:
       registry: demoArt
       sourceRepository: docker_local   # required if registry is Artifactory
-      imageName: http://146.148.104.158:8082/docker-local/alpine37
+      imageName: 146.148.104.158:8082/docker-local/alpine37
       imageTag: latest       
       autoPull: true
 
@@ -54,7 +54,7 @@ pipelines:
           inputSteps:
             - name: docker_build
           outputResources: 
-            - name: image_dbp
+            - name: image_pdbp
 
       - name: publish_build_info
         type: PublishBuildInfo
