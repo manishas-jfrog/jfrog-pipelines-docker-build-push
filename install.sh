@@ -29,6 +29,12 @@ wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.27-r0/glib
 apk add glibc-2.27-r0.apk glibc-bin-2.27-r0.apk glibc-i18n-2.27-r0.apk
 /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 
+JFROG_VERSION=1.33.2
+echo "================= Adding jfrog-cli $JFROG_VERSION  ================"
+wget -nv https://api.bintray.com/content/jfrog/jfrog-cli-go/"$JFROG_VERSION"/jfrog-cli-linux-amd64/jfrog?bt_package=jfrog-cli-linux-amd64 -O jfrog
+sudo chmod +x jfrog
+mv jfrog /usr/bin/jfrog
+
 echo "================ make some useful symlinks that are expected to exist ======================="
 if [[ ! -e /usr/bin/python ]];        then ln -sf /usr/bin/python2.7 /usr/bin/python; fi
 if [[ ! -e /usr/bin/python-config ]]; then ln -sf /usr/bin/python2.7-config /usr/bin/python-config; fi
