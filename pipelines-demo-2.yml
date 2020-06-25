@@ -1,0 +1,77 @@
+resources:
+  - name: repo_1_docker_build_push
+    type: GitRepo
+    configuration:
+      gitProvider: manishas_github   # replace with your integration
+      path: manishas-jfrog/jfrog-pipelines-docker-build-push    # replace with your repository name
+      branches:
+        include: master
+
+  - name: build_info_1_docker_build_push
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: demoArt
+      buildName: svc_build
+      buildNumber: 1
+
+  - name: promoted_build_info
+    type: BuildInfo
+    configuration:
+      sourceArtifactory: demoArt
+      buildName: svc_build
+      buildNumber: 1
+      
+  - name: image_dbp
+     type: Image
+     configuration:
+       registry: demoArt
+       sourceRepository: docker_local   # required if registry is Artifactory
+       imageName: http://146.148.104.158:8082/docker-local/alpine37
+       imageTag: 1
+       autoPull: true
+
+pipelines:
+  - name: pipeline_docker_build_push
+    steps:
+      - name: docker_build
+        type: DockerBuild
+        configuration:
+          dockerFileLocation: .
+          dockerFileName: Dockerfile
+          dockerImageName: 34.68.55.176:8082/docker-local/alpine37
+          dockerImageTag: ${run_number}
+          inputResources:
+            - name: repo_1_docker_build_push
+          integrations:
+            - name: demoArt
+
+      - name: docker_push
+        type: DockerPush
+        configuration:
+          targetRepository: docker-local
+          integrations:
+            - name: demoArt
+          inputSteps:
+            - name: docker_build
+          outputResources: 
+            - name: image_dbp
+
+      - name: publish_build_info
+        type: PublishBuildInfo
+        configuration:
+          inputSteps:
+            - name: docker_push
+          outputResources:
+            - name: build_info_1_docker_build_push
+
+      - name: promote_build
+        type: PromoteBuild
+        configuration:
+          targetRepository: promoted-pipelines
+          integrations:
+            - name: demoArt
+          inputResources:
+            - name: build_info_1_docker_build_push
+          outputResources:
+            - name: promoted_build_info
+
