@@ -14,7 +14,7 @@ resources:
       buildName: svc_build
       buildNumber: 1
       
-  - name: image_pdbp
+  - name: image_dbp
     type: Image
     configuration:
       registry: demoArt
@@ -47,5 +47,5 @@ pipelines:
           inputSteps:
             - name: docker_build
           outputResources: 
-            - name: image_pdbp
+            - name: image_dbp
 
