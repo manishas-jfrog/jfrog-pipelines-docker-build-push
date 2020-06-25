@@ -27,7 +27,7 @@ resources:
       registry: demoArt
       sourceRepository: docker_local   # required if registry is Artifactory
       imageName: http://146.148.104.158:8082/docker-local/alpine37
-      imageTag: 1       
+      imageTag: latest       
       autoPull: true
 
 pipelines:
