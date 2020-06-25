@@ -1,6 +1,8 @@
-FROM alpine:3.7
+FROM ubuntu:18.04
 
-ADD . /tmp
+RUN chmod +x install.sh
 
-RUN apk add --no-cache bash
+RUN install.sh && rm -rf /tmp && mkdir /tmp && chmod 1777 /tmp
+
+ENV BASH_ENV "/etc/drydock/.env"
 
