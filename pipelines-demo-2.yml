@@ -22,13 +22,13 @@ resources:
       buildNumber: 1
       
   - name: image_dbp
-     type: Image
-     configuration:
-       registry: demoArt
-       sourceRepository: docker_local   # required if registry is Artifactory
-       imageName: http://146.148.104.158:8082/docker-local/alpine37
-       imageTag: 1
-       autoPull: true
+    type: Image
+    configuration:
+      registry: demoArt
+      sourceRepository: docker_local   # required if registry is Artifactory
+      imageName: http://146.148.104.158:8082/docker-local/alpine37
+      imageTag: 1       
+      autoPull: true
 
 pipelines:
   - name: pipeline_docker_build_push
