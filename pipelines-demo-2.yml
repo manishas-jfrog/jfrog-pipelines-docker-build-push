@@ -19,7 +19,7 @@ resources:
     configuration:
       registry: demoArt
       sourceRepository: docker-local   # required if registry is Artifactory
-      imageName: manisha.jfrog.io/docker-local/mydockerbase
+      imageName: manisha-docker-local.jfrog.io/mydockerbase
       imageTag: latest       
       autoPull: true
 
@@ -31,7 +31,7 @@ pipelines:
         configuration:
           dockerFileLocation: .
           dockerFileName: Dockerfile
-          dockerImageName: manisha.jfrog.io/docker-local/mydockerbase
+          dockerImageName: manisha-docker-local.jfrog.io/mydockerbase
           dockerImageTag: ${run_number}
           inputResources:
             - name: repo_1_docker_build_push
