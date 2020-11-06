@@ -29,6 +29,7 @@ pipelines:
       - name: docker_build
         type: DockerBuild
         configuration:
+          affinityGroup: dockerExample
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: smanisha.jfrog.io/mydockerrepo/mydocker
@@ -41,6 +42,7 @@ pipelines:
       - name: docker_push
         type: DockerPush
         configuration:
+          affinityGroup: dockerExample
           targetRepository: mydockerrepo
           integrations:
             - name: demoArt
