@@ -52,6 +52,9 @@ pipelines:
       - name: docker_build
         type: DockerBuild
         configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NAME: custonBuildName
+            JFROG_CLI_BUILD_NUMBER: ${run_number}
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: u16.jfrog-pipelines.com/docker-local/alpine37
